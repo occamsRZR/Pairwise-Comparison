@@ -1,0 +1,17 @@
+This is the README for the Pairwise-Comparison program.  It is written in C so I will guide you through compiling and running the program.
+
+To compile, I've been using:
+
+   `gcc -o pairwise main.c pairwise.c`
+
+This will produce a binary called 'pairwise'.  From here you can run it but you will need to supply a couple of arguments.  The first argument is the number of sequences in the alignment.  The second argument is the alignment file.  The 'alignment.fa' file is included in this repo as an example.  By running:
+
+  `./pairwise 62 alignment.fa`
+
+This means that there are 62 sequences and the alignment file is called 'alignment.fa'.  The easiest way I've found to count the number of sequences in an alignment is by using grep as such: 
+
+  `grep -c '>' alignment.fa`
+
+This should produce '62'.  This is assuming that the alignment is saved in FASTA format.
+
+Further progress in this program will allow the user to omit the use of the number of sequences argument.
