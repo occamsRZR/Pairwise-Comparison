@@ -41,13 +41,18 @@ main(int argc, char *argv[])                                                    
     int aln_length = read_alignment(file_name, num_seq, all_seqs);
     // Normally, I would define how many comparisons we will do
     float pairwise_comparisons[num_comparisons];
-    calculate_hamming_dists(&pairwise_comparisons, num_comparisons, all_seqs, aln_length, num_seq);
+    calculate_hamming_dists(pairwise_comparisons, num_comparisons, all_seqs, aln_length, num_seq);
     int i;
-    // for each of the comparisons, print out the float
-    for(i = 0; i < num_comparisons; i++){
-        printf("Comp: %i Result: %f\n", i+1, pairwise_comparisons[i]);
-    }
-     
+
+    float maximum = 0.00;
+    float minimum = 1.00;
+    float average = 0.00;
+    
+    maximum = get_max_dist(pairwise_comparisons, num_comparisons);
+    minimum = get_min_dist(pairwise_comparisons, num_comparisons);
+    average = get_avg_dist(pairwise_comparisons, num_comparisons);
+
+    printf("Max: %f Min: %f Avg: %f \n", maximum, minimum, average);
     return 0;
 }
 

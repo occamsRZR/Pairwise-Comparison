@@ -127,12 +127,12 @@ int read_alignment(string file_name, int num_seq, string *all_seqs)
     calculate_hamming_dists:
       this method allows you to calculate the hamming distance using
       inputs:
-        comparisons
-	num_comparisons
-	all_seqs
-	aln_len
-	num_seqs
-        
+        pairwise_comparisons
+	    num_comparisons
+	    all_seqs
+	    aln_len
+	    num_seqs
+      nothing is returned, only the pairwise_comparisons array is altered
 
 */
 void calculate_hamming_dists(float *pairwise_comparisons, int num_comparisons, string *all_seqs, int aln_len, int num_seqs)
@@ -188,45 +188,82 @@ void calculate_hamming_dists(float *pairwise_comparisons, int num_comparisons, s
                     }
  
             }
+            float ratio_temp = 0.00; 
             ratio_temp = matches / total;
-            printf("Ratio %i: %f\n", num_comp_temp, ratio_temp);
-            
+            pairwise_comparisons[num_comp_temp - 1] = ratio_temp;
         }
-    }
-    printf("number of comparisons temp: %i \t num total: %i\n", num_comp_temp, num_comparisons);
-    
+    }   
 }
 
 
 /*
     
     get_max_dist:
+        This method will take in an array and find the maximum value.
+        Inputs:
+            *pairwise_comparisons
+            num_comparisons
+        Outputs:
+            maximum
         
 
 */
-float get_max_dist()
+float get_max_dist(float *pairwise_comparisons, int num_comparisons)
 {
-
+    int i;
+    float maximum = 0.00;
+    for(i = 0; i < num_comparisons; i++){
+        if(pairwise_comparisons[i] > maximum){
+            maximum = pairwise_comparisons[i];
+        }
+    }
+    return maximum;
 }
 
 /*
     
     get_avg_dist:
+        This method will take in an array and find the average.
+        Inputs:
+            *pairwise_comparisons
+            num_comparisons
+        Output:
+            average
+            
 
 */
-float get_avg_dist()
+float get_avg_dist(float *pairwise_comparisons, int num_comparisons)
 {
-
+    int i;
+    float total = 0.00;
+    float average = 0.00;
+    for(i = 0; i < num_comparisons; i++){
+        total += pairwise_comparisons[i];
+    }
+    average = total / num_comparisons;
+    return average;
 }
 /*
 
     get_min_dist:
-
+        This method will take in an array and find the maximum value.
+        Inputs:
+            *pairwise_comparisons
+            num_comparisons
+        Outputs
+            minimum
 
 */
-float get_min_dist()
+float get_min_dist(float *pairwise_comparisons, int num_comparisons)
 {
-
+    int i;
+    float minimum = 1.00;
+    for(i = 0; i < num_comparisons; i++){
+        if(pairwise_comparisons[i] < minimum){
+            minimum = pairwise_comparisons[i];
+        }
+    }
+    return minimum;
 }
 
 
