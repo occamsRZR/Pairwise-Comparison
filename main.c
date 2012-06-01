@@ -55,7 +55,7 @@ main(int argc, char *argv[])                                                    
     minimum = get_min_dist(pairwise_comparisons, num_comparisons);
     average = get_avg_dist(pairwise_comparisons, num_comparisons);
 
-
+    free(pairwise_comparisons);
     printf("Max: %f Min: %f Avg: %f \n", maximum, minimum, average);
 
 

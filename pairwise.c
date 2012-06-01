@@ -192,7 +192,12 @@ void calculate_hamming_dists(float *pairwise_comparisons, int num_comparisons, s
             ratio_temp = matches / total;
             pairwise_comparisons[num_comp_temp - 1] = ratio_temp;
         }
-    }   
+    }
+    
+    // now we can free all of our sequences
+    for(i = 0; i < num_seqs; i++){
+        free(all_seqs[i]);
+    }
 }
 
 
