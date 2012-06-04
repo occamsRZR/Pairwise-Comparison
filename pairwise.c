@@ -183,7 +183,7 @@ void calculate_hamming_dists(float *pairwise_comparisons, int num_comparisons, s
                     }
                     // If none of these are true, print a warning and exit.
                     else{
-                        printf("None of the three conditions were made!\n");
+                        printf("None of the three conditions were met!\n");
                         exit;
                     }
  
@@ -201,6 +201,23 @@ void calculate_hamming_dists(float *pairwise_comparisons, int num_comparisons, s
 }
 
 
+/*
+
+    calculate_p_distances:
+        This method will take the Hamming distance from the previous method
+        and convert it to a p-distance.  This is simply...
+            p = 1 - Hamming distance
+        
+        NOTE: We might want to use a separate array to store this later.
+
+*/
+void calculdate_p_distances(float *pairwise_comparisons, int num_comparisons)
+{
+    int i;
+    for(i = 0; i < num_comparisons; i++){
+        pairwise_comparisons[i] = 1 - pairwise_comparisons[i];
+    }
+}
 /*
     
     get_max_dist:

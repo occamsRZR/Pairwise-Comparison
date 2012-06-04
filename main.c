@@ -55,8 +55,12 @@ main(int argc, char *argv[])                                                    
     minimum = get_min_dist(pairwise_comparisons, num_comparisons);
     average = get_avg_dist(pairwise_comparisons, num_comparisons);
 
+    printf("Hamming distance (similarity)\n");
+    printf("\tMax: %f \n\tMin: %f \n\tAvg: %f \n", maximum, minimum, average);
+    printf("p-distance\n");
+    printf("\tMax: %f \n\tMin: %f \n\tAvg: %f \n", 1 - minimum, 1 - maximum, 1 - average);
+
     free(pairwise_comparisons);
-    printf("Max: %f Min: %f Avg: %f \n", maximum, minimum, average);
 
 
     return 0;

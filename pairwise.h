@@ -13,4 +13,4 @@ void calculate_hamming_dists(float *pairwise_comparisons, int num_comparisons, s
 float get_max_dist(float *pairwise_comparisons, int num_comparisons);
 float get_avg_dist(float *pairwise_comparisons, int num_comparisons);
 float get_min_dist(float *pairwise_comparisons, int num_comparisons);
-
+void calculdate_p_distances(float *pairwise_comparisons, int num_comparisons);
