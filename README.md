@@ -26,3 +26,14 @@ For example, the supplied alignment (alignment.fa) has 62 proteins.  You would r
     $ ./pairwise 62 alignment.fa
     
 From here, it will read in the file and calculate the uncorrected protein distance between all the sequences.  After it is done, it will print out the minimum, maximum and average distances.
+
+What if I don't know the number of sequences?
+--------------------------------------------------
+
+Before I add support to automatically count the number of sequences, the easiest and fastest way to find the number of sequences in a given FASTA alignment file is by running the following grep command:
+
+    $ grep -c '>' alignment.fa
+    
+Where alignment.fa is your alignment file, the -c flag is telling grep to count the number of '>'s in this file.  You can then use this number when running pairwise.
+
+NOTE:  At this time, we know how many sequences are in our alignments for the experiments we are running.  That being said, the feature to automatically count sequences may or may not be incorporated in a timely manner.
