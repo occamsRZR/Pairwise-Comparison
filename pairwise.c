@@ -202,6 +202,84 @@ void calculate_hamming_dists(float *pairwise_comparisons, int num_comparisons, s
 
 
 /*
+    
+    calculate_p_dists:
+      this method allows you to calculate the protein distance using
+      inputs:
+        pairwise_comparisons
+	    num_comparisons
+	    all_seqs
+	    aln_len
+	    num_seqs
+      nothing is returned, only the pairwise_comparisons array is altered
+
+*/
+void calculate_p_dists(float *pairwise_comparisons, int num_comparisons, string *all_seqs, int aln_len, int num_seqs)
+{
+    int i, j, k, offset;
+    int num_comp_temp = 0;
+    
+    // Our i variable is going to track the first sequence number
+    for(i = 0; i < num_seqs; i++){
+        offset = 1;
+        // Our j variable is going to track the second sequence number
+        for(j = i + 1; (j < num_seqs) && (i != (num_seqs - 1)); j++){
+            num_comp_temp++;
+            float mismatches = 0.00;
+            float total = 0.00;
+            // Our k variable is going to track the position in the alignment
+            for(k = 0; k < aln_len; k++){
+
+                char position1, position2;
+                position1 = all_seqs[i][k];
+                position2 = all_seqs[j][k];
+              
+                /*
+                
+                    There will be three different cases we will be looking for:
+                    
+                        1:  Either position has an indel "-"
+                                - do nothing
+                        2:  The two positions are the same (a match)
+                                - increment the matches
+                                - increment the total
+                        3:  The two positions are different (a mismatch)
+                                - increment the total
+                                
+                */
+                    // 1: Either position has an indel
+                    if((ispunct(position1)) || (ispunct(position2))){
+                        ;
+                    }
+                    // 2: Else if the positions are the same, increment matches and total
+                    else if(position1 == position2){
+                        total++;
+                    }
+                    // 3: Else if the positions are different, increment total
+                    else if(position1 != position2){
+                        mismatches++;
+                        total++;
+                    }
+                    // If none of these are true, print a warning and exit.
+                    else{
+                        printf("None of the three conditions were met!\n");
+                        exit;
+                    }
+ 
+            }
+            float ratio_temp = 0.00; 
+            ratio_temp = mismatches / total;
+            pairwise_comparisons[num_comp_temp - 1] = ratio_temp;
+        }
+    }
+    
+    // now we can free all of our sequences
+    for(i = 0; i < num_seqs; i++){
+        free(all_seqs[i]);
+    }
+}
+
+/*
 
     calculate_p_distances:
         This method will take the Hamming distance from the previous method

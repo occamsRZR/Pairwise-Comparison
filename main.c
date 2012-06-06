@@ -42,7 +42,9 @@ main(int argc, char *argv[])                                                    
     // Normally, I would define how many comparisons we will do
     //float pairwise_comparisons[num_comparisons];
     float *pairwise_comparisons = malloc(num_comparisons * sizeof(float));
-    calculate_hamming_dists(pairwise_comparisons, num_comparisons, all_seqs, aln_length, num_seq);
+    //calculate_hamming_dists(pairwise_comparisons, num_comparisons, all_seqs, aln_length, num_seq);
+    calculate_p_dists(pairwise_comparisons, num_comparisons, all_seqs, aln_length, num_seq);
+
     int i;
 
 
@@ -55,10 +57,10 @@ main(int argc, char *argv[])                                                    
     minimum = get_min_dist(pairwise_comparisons, num_comparisons);
     average = get_avg_dist(pairwise_comparisons, num_comparisons);
 
-    printf("Hamming distance (similarity)\n");
-    printf("\tMax: %f \n\tMin: %f \n\tAvg: %f \n", maximum, minimum, average);
+    //printf("Hamming distance (similarity)\n");
+    //printf("\tMax: %f \n\tMin: %f \n\tAvg: %f \n", maximum, minimum, average);
     printf("p-distance\n");
-    printf("\tMax: %f \n\tMin: %f \n\tAvg: %f \n", 1 - minimum, 1 - maximum, 1 - average);
+    printf("\tMin: %f \n\tMax: %f \n\tAvg: %f \n", minimum, maximum, average);
 
     free(pairwise_comparisons);
 
